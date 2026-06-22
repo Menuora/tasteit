@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Taste.it Admin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <main class="admin-shell">
+    <section id="loginView" class="login-panel">
+      <div class="login-copy">
+        <span class="eyebrow">Taste.it Admin</span>
+        <h1>Manage bookings, images, and website details from one polished dashboard.</h1>
+        <p>Use the credentials from your environment variables. This page is intentionally hidden from public navigation.</p>
+      </div>
+      <form id="loginForm" class="login-card">
+        <h2>Admin Login</h2>
+        <label>Username<input name="username" autocomplete="username" required></label>
+        <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
+        <button type="submit">Sign in</button>
+        <p id="loginMessage" class="form-message"></p>
+      </form>
+    </section>
+
+    <section id="dashboardView" class="dashboard is-hidden">
+      <aside class="sidebar">
+        <a class="brand" href="index.html">Taste.<span>it</span></a>
+        <button class="tab active" data-tab="bookings"><i class="fa fa-calendar"></i> Bookings</button>
+        <button class="tab" data-tab="images"><i class="fa fa-picture-o"></i> Menu Images</button>
+        <button class="tab" data-tab="settings"><i class="fa fa-sliders"></i> Website Settings</button>
+        <button class="tab" data-tab="homeImages"><i class="fa fa-image"></i> Homepage Images</button>
+        <button id="logoutBtn" class="logout"><i class="fa fa-sign-out"></i> Logout</button>
+      </aside>
+      <div class="dashboard-main">
+        <header class="dashboard-header">
+          <div><span class="eyebrow">Dashboard</span><h1 id="dashboardTitle">Bookings</h1></div>
+          <a href="gallery.html" target="_blank">View public gallery</a>
+        </header>
+
+        <section id="bookings" class="panel active"><div id="bookingList" class="booking-list"></div></section>
+
+        <section id="images" class="panel">
+          <form id="imageForm" class="admin-card grid-form" enctype="multipart/form-data">
+            <label>Image title<input name="title" placeholder="Dinner menu / Paneer tikka" required></label>
+            <label>Image type<select name="type"><option value="menu">Full menu image</option><option value="item">Individual item image</option></select></label>
+            <label>Upload image<input name="image" type="file" accept="image/*"></label>
+            <label>Or paste Cloudinary URL<input name="imageUrl" placeholder="https://res.cloudinary.com/.../image/upload/..."></label>
+            <button type="submit">Save image</button><p id="imageMessage" class="form-message"></p>
+          </form>
+          <div id="imageList" class="image-grid"></div>
+        </section>
+
+        <section id="settings" class="panel">
+          <form id="settingsForm" class="admin-card grid-form">
+            <label>Hotel/restaurant name<input name="restaurantName" required></label>
+            <label>Facebook link<input name="facebookLink"></label>
+            <label>Instagram link<input name="instagramLink"></label>
+            <label>Twitter/X link<input name="twitterLink"></label>
+            <label>Opening time<input name="openingTime" placeholder="9:00"></label>
+            <label>Closing time<input name="closingTime" placeholder="24:00"></label>
+            <label class="wide">Google Maps iframe code or src<textarea name="googleMapsEmbed" rows="4"></textarea></label>
+            <button type="submit">Save settings</button><p id="settingsMessage" class="form-message"></p>
+          </form>
+        </section>
+
+        <section id="homeImages" class="panel">
+          <form id="homeImagesForm" class="admin-card grid-form image-settings-form">
+            <label>Hero image 1<input name="heroImage1"></label>
+            <label>Hero image 1 corner/secondary<input name="heroImage1Secondary"></label>
+            <label>Hero image 2<input name="heroImage2"></label>
+            <label>Hero image 2 corner/secondary<input name="heroImage2Secondary"></label>
+            <label>About image 1<input name="aboutImage1"></label>
+            <label>About image 2<input name="aboutImage2"></label>
+            <label>Booking/reservation side image<input name="bookingSideImage"></label>
+            <label>Menu page header image<input name="menuHeaderImage"></label>
+            <label>Gallery/images page header image<input name="galleryHeaderImage"></label>
+            <label>Contact page header image<input name="contactHeaderImage"></label>
+            <button type="submit">Save homepage images</button><p id="homeImagesMessage" class="form-message"></p>
+          </form>
+        </section>
+      </div>
+    </section>
+  </main>
+  <script src="js/admin.js"></script>
+</body>
+</html>

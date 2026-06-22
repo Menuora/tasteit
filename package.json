@@ -1,0 +1,19 @@
+{
+  "name": "sellable-hotel-restaurant-template",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Vercel-ready hotel and restaurant website template with admin dashboard, bookings, Cloudinary image uploads, and editable settings.",
+  "main": "server.js",
+  "scripts": {
+    "dev": "node server.js",
+    "check": "node --check server.js && node --check api/index.js && node --check js/site-settings.js && node --check js/bookings.js && node --check js/gallery.js && node --check js/admin.js",
+    "smoke": "node scripts/smoke.js"
+  },
+  "dependencies": {
+    "cloudinary": "^2.5.1",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-session": "^1.18.1",
+    "multer": "^1.4.5-lts.1"
+  }
+}
