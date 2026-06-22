@@ -1,0 +1,5 @@
+.gallery-card { background: #fff; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+.gallery-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.gallery-card h3 { padding: 18px; margin: 0; font-size: 20px; }
+.booking-message { color: #fff; font-weight: 700; margin: 8px 0 0; }
+.ftco-footer iframe, #map iframe { border-radius: 4px; min-height: 260px; }
