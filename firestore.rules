@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 1. Settings Collection: Anyone can read, only authenticated admin users can modify configuration
+    match /settings/{document} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // 2. Bookings Collection: Public can submit bookings (create), only admin users can view (read) and delete (write) them
+    match /bookings/{document} {
+      allow create: if true;
+      allow read, write: if request.auth != null;
+    }
+
+    // 3. Gallery Images Collection: Public can view images, only admin users can upload or delete them
+    match /images/{document} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}

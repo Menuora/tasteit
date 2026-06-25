@@ -42,7 +42,10 @@
     addGalleryNav();
     updateForms();
     try {
-      const settings = await fetch("/api/settings").then((res) => res.json());
+      const [settings, homepageImages] = await Promise.all([
+        window.dbApi.getSettings(),
+        window.dbApi.getHomepageImages()
+      ]);
       const name = settings.restaurantName || "Taste.it";
       document.title = document.title.replace("Taste.it", name);
       document.querySelectorAll(".navbar-brand").forEach((brand) => { brand.innerHTML = name.includes(".") ? name.replace(".", ".<span>") + "</span>" : name; });
@@ -52,7 +55,7 @@
       setHref(".fa-twitter", settings.twitterLink);
       setText("[data-opening-hours]", `${settings.openingTime || "9:00"} - ${settings.closingTime || "24:00"}`);
       applyMap(settings.googleMapsEmbed);
-      const img = settings.images || {};
+      const img = homepageImages || {};
       setBg(".home-slider .slider-item:nth-child(1)", img.heroImage1);
       setBg(".home-slider .slider-item:nth-child(2)", img.heroImage2);
       setBg(".wrap-about.img", img.aboutImage1);
@@ -69,12 +72,14 @@
     const message = form.querySelector(".booking-message");
     try {
       const payload = Object.fromEntries(new FormData(form).entries());
-      const response = await fetch("/api/bookings", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
-      const data = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(data.error || "Could not save booking.");
+      await window.dbApi.addBooking(payload);
       form.reset();
       message.textContent = "Thank you. Your booking request has been sent.";
-    } catch (error) { message.textContent = error.message; }
+      message.style.color = "#2d6a32";
+    } catch (error) { 
+      message.textContent = error.message; 
+      message.style.color = "#8c2f21";
+    }
   });
   document.addEventListener("DOMContentLoaded", loadSettings);
 })();

@@ -3,7 +3,7 @@
     const menu = document.getElementById("menuImages");
     const items = document.getElementById("itemImages");
     if (!menu || !items) return;
-    const images = await fetch("/api/gallery").then((res) => res.json()).catch(() => []);
+    const images = await window.dbApi.getImages().catch(() => []);
     const fallback = '<div class="col-md-12 text-center"><p>No images have been uploaded yet. Add them from /admin.</p></div>';
     function render(type) {
       const filtered = images.filter((img) => img.type === type);
